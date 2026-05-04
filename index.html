@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXPRESS-CAR Lava Jato | Sorocaba - SP</title>
+  <meta name="description" content="Lava-rápido em Sorocaba com nota 4.9 no Google. Lavagem simples, completa, higienização e serviço leva e traz. Qualidade que você sente na primeira lavagem." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM — EXPRESS-CAR LAVA JATO
+       Aesthetic: Premium Automotive Noir
+       Palette: Deep navy-black · Electric blue · Platinum white
+    ============================================================ */
+    :root {
+      --c-bg:        #080c14;
+      --c-bg2:       #0d1422;
+      --c-surface:   #111827;
+      --c-border:    #1e2d47;
+      --c-blue:      #1565ff;
+      --c-blue-light:#3d7fff;
+      --c-blue-glow: rgba(21, 101, 255, 0.25);
+      --c-white:     #f2f5ff;
+      --c-muted:     #8da0bc;
+      --c-accent:    #e8f0ff;
+      --ff-display:  'Bebas Neue', sans-serif;
+      --ff-body:     'DM Sans', sans-serif;
+      --radius:      12px;
+      --radius-lg:   20px;
+      --transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--c-bg);
+      color: var(--c-white);
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    /* ——— SCROLLBAR ——— */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--c-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--c-blue); border-radius: 3px; }
+
+    /* ——— UTILITY ——— */
+    .container {
+      width: min(1200px, 100% - 2rem);
+      margin-inline: auto;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-blue-light);
+      margin-bottom: 1rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--c-blue);
+    }
+
+    h2.section-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      color: var(--c-white);
+    }
+
+    h2.section-title span { color: var(--c-blue-light); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-family: var(--ff-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--c-blue);
+      color: #fff;
+      box-shadow: 0 0 28px var(--c-blue-glow);
+    }
+    .btn-primary:hover {
+      background: var(--c-blue-light);
+      box-shadow: 0 0 42px rgba(21,101,255,0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--c-white);
+      border: 1.5px solid var(--c-border);
+    }
+    .btn-outline:hover {
+      border-color: var(--c-blue);
+      color: var(--c-blue-light);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       HEADER / NAVBAR
+    ============================================================ */
+    header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 900;
+      padding: 0;
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      background: rgba(8, 12, 20, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo .logo-mark {
+      width: 40px;
+      height: 40px;
+      background: var(--c-blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .nav-logo .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-logo .logo-top {
+      font-family: var(--ff-display);
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      color: var(--c-white);
+    }
+
+    .nav-logo .logo-sub {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--c-muted);
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--c-white); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--c-white);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--c-bg2);
+      border-bottom: 1px solid var(--c-border);
+      padding: 1rem 0;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 0.9rem 1.5rem;
+      text-decoration: none;
+      color: var(--c-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--c-white); }
+    .mobile-menu .btn { margin: 0.75rem 1.5rem 0.25rem; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+
+    /* Animated background grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--c-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--c-border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.25;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 40%, transparent 100%);
+    }
+
+    /* Blue radial glow behind headline */
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(21,101,255,0.18) 0%, transparent 65%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Diagonal accent bar */
+    .hero-stripe {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(21,101,255,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(21,101,255,0.12);
+      border: 1px solid rgba(21,101,255,0.35);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--c-blue-light);
+      margin-bottom: 1.5rem;
+      animation: fadeDown 0.7s ease both;
+    }
+    .hero-badge i { font-size: 0.75rem; }
+
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(3.2rem, 10vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.015em;
+      color: var(--c-white);
+      animation: fadeDown 0.8s 0.1s ease both;
+    }
+    .hero-title .accent { color: var(--c-blue-light); }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--c-muted);
+      max-width: 520px;
+      margin-top: 1.4rem;
+      line-height: 1.7;
+      font-weight: 300;
+      animation: fadeDown 0.8s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2.4rem;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--c-border);
+      animation: fadeDown 0.8s 0.4s ease both;
+    }
+
+    .hero-stat-item strong {
+      display: block;
+      font-family: var(--ff-display);
+      font-size: 2rem;
+      letter-spacing: 0.02em;
+      color: var(--c-white);
+    }
+    .hero-stat-item span {
+      font-size: 0.8rem;
+      color: var(--c-muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* Floating card on hero */
+    .hero-card {
+      position: absolute;
+      right: 5%;
+      bottom: 12%;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.8rem;
+      z-index: 3;
+      min-width: 220px;
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    .hero-card .stars {
+      color: #f5b731;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+    .hero-card .rating-num {
+      font-family: var(--ff-display);
+      font-size: 2.2rem;
+      color: var(--c-white);
+      line-height: 1;
+      margin: 0.3rem 0 0.1rem;
+    }
+    .hero-card .rating-label {
+      font-size: 0.72rem;
+      color: var(--c-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       SECTION SHARED
+    ============================================================ */
+    section { padding: clamp(4rem, 8vw, 7rem) 0; }
+
+    /* ============================================================
+       SOBRE
+    ============================================================ */
+    #sobre { background: var(--c-bg2); }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .sobre-img-block {
+      position: relative;
+    }
+
+    .sobre-img-bg {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--c-surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Decorative car silhouette via CSS */
+    .car-visual {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse 70% 40% at 50% 60%, rgba(21,101,255,0.15) 0%, transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .car-visual::before {
+      content: '';
+      position: absolute;
+      bottom: 28%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--c-blue), transparent);
+      filter: blur(2px);
+    }
+
+    .car-visual i {
+      font-size: 6rem;
+      color: rgba(255,255,255,0.06);
+    }
+
+    .sobre-badge-float {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--c-blue);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(21,101,255,0.4);
+    }
+    .sobre-badge-float strong {
+      display: block;
+      font-family: var(--ff-display);
+      font-size: 1.8rem;
+      color: #fff;
+    }
+    .sobre-badge-float span {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .sobre-text p {
+      color: var(--c-muted);
+      margin-top: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .sobre-text p + p { margin-top: 0.9rem; }
+
+    .sobre-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 2rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(21,101,255,0.1);
+      border: 1px solid rgba(21,101,255,0.25);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--c-blue-light);
+    }
+    .chip i { font-size: 0.7rem; }
+
+    /* ============================================================
+       SERVIÇOS
+    ============================================================ */
+    #servicos { background: var(--c-bg); }
+
+    .servicos-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+    }
+
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .servico-card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .servico-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(21,101,255,0.06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .servico-card:hover {
+      border-color: rgba(21,101,255,0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(21,101,255,0.15);
+    }
+
+    .servico-card:hover::before { opacity: 1; }
+
+    /* Featured card */
+    .servico-card.featured {
+      border-color: var(--c-blue);
+      background: linear-gradient(135deg, rgba(21,101,255,0.12) 0%, var(--c-surface) 60%);
+    }
+    .servico-card.featured::after {
+      content: 'Diferencial';
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: var(--c-blue);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .servico-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(21,101,255,0.12);
+      border: 1px solid rgba(21,101,255,0.25);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--c-blue-light);
+      margin-bottom: 1.4rem;
+    }
+
+    .servico-card h3 {
+      font-family: var(--ff-display);
+      font-size: 1.45rem;
+      letter-spacing: 0.02em;
+      color: var(--c-white);
+      margin-bottom: 0.7rem;
+    }
+
+    .servico-card p {
+      font-size: 0.88rem;
+      color: var(--c-muted);
+      line-height: 1.75;
+    }
+
+    .servico-items {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .servico-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--c-accent);
+    }
+    .servico-item i {
+      color: var(--c-blue-light);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       AVALIAÇÕES
+    ============================================================ */
+    #avaliacoes { background: var(--c-bg2); }
+
+    .rating-hero {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .rating-big {
+      text-align: center;
+      padding-right: 2rem;
+      border-right: 1px solid var(--c-border);
+    }
+    .rating-big .num {
+      font-family: var(--ff-display);
+      font-size: 4rem;
+      color: var(--c-white);
+      line-height: 1;
+    }
+    .rating-big .stars {
+      color: #f5b731;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      display: block;
+      margin: 0.3rem 0;
+    }
+    .rating-big small {
+      font-size: 0.72rem;
+      color: var(--c-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .rating-bars { flex: 1; }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+    .bar-row span { font-size: 0.75rem; color: var(--c-muted); width: 36px; }
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--c-border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--c-blue);
+      border-radius: 100px;
+      transition: width 1.2s ease;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem;
+      transition: var(--transition);
+    }
+    .review-card:hover {
+      border-color: rgba(21,101,255,0.3);
+      transform: translateY(-3px);
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .reviewer-info strong {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--c-white);
+    }
+    .reviewer-info .review-meta {
+      font-size: 0.72rem;
+      color: var(--c-muted);
+    }
+
+    .review-stars {
+      color: #f5b731;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    .review-card blockquote {
+      font-size: 0.88rem;
+      color: var(--c-muted);
+      line-height: 1.75;
+      border: none;
+      position: relative;
+      padding-left: 1.1rem;
+    }
+    .review-card blockquote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 3px;
+      background: var(--c-blue);
+      border-radius: 2px;
+    }
+
+    .review-source {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      color: var(--c-muted);
+    }
+    .review-source i { color: #4285f4; }
+
+    /* ============================================================
+       DIFERENCIAIS
+    ============================================================ */
+    #diferenciais { background: var(--c-bg); }
+
+    .diferenciais-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .diferenciais-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .diferencial-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.4rem;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .diferencial-item:hover {
+      border-color: rgba(21,101,255,0.4);
+    }
+
+    .dif-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      background: rgba(21,101,255,0.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--c-blue-light);
+    }
+
+    .dif-body strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--c-white);
+      margin-bottom: 0.3rem;
+    }
+    .dif-body p {
+      font-size: 0.83rem;
+      color: var(--c-muted);
+      line-height: 1.65;
+    }
+
+    /* Security note */
+    .security-note {
+      background: rgba(21,101,255,0.06);
+      border: 1px solid rgba(21,101,255,0.2);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    .security-note .sn-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(21,101,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--c-blue-light);
+      margin-bottom: 1.2rem;
+    }
+    .security-note h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--c-white);
+      margin-bottom: 0.6rem;
+    }
+    .security-note p {
+      font-size: 0.85rem;
+      color: var(--c-muted);
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       LOCALIZAÇÃO
+    ============================================================ */
+    #localizacao { background: var(--c-bg2); }
+
+    .localizacao-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .info-blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .info-block {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.2rem;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+    }
+
+    .ib-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      background: rgba(21,101,255,0.12);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-blue-light);
+      font-size: 1rem;
+    }
+
+    .ib-text strong {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-muted);
+      margin-bottom: 0.25rem;
+    }
+    .ib-text span {
+      font-size: 0.9rem;
+      color: var(--c-white);
+    }
+    .ib-text .open-badge {
+      display: inline-block;
+      background: rgba(34,197,94,0.15);
+      color: #4ade80;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 100px;
+      border: 1px solid rgba(74,222,128,0.3);
+      margin-left: 6px;
+    }
+
+    .map-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--c-border);
+      height: 380px;
+    }
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: invert(90%) hue-rotate(180deg);
+    }
+
+    /* ============================================================
+       CONTATO / CTA
+    ============================================================ */
+    #contato {
+      background: var(--c-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contato::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 50% 50%, rgba(21,101,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box {
+      position: relative;
+      z-index: 1;
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: 24px;
+      padding: clamp(2.5rem, 5vw, 4.5rem);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-box h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.05;
+      color: var(--c-white);
+      margin-bottom: 1rem;
+    }
+
+    .cta-box p {
+      color: var(--c-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: #fff;
+      box-shadow: 0 0 28px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover {
+      background: #1fb855;
+      box-shadow: 0 0 42px rgba(37,211,102,0.45);
+      transform: translateY(-2px);
+    }
+
+    .cta-guarantee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--c-muted);
+    }
+    .cta-guarantee i { color: var(--c-blue-light); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--c-bg2);
+      border-top: 1px solid var(--c-border);
+      padding: 2.5rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--c-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--c-muted);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--c-blue-light); }
+
+    /* ============================================================
+       WHATSAPP FLOATING BUTTON
+    ============================================================ */
+    .wa-float {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      z-index: 800;
+      background: #25d366;
+      color: #fff;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.5);
+      animation: pulse-wa 2.5s ease-in-out infinite;
+      transition: transform var(--transition);
+    }
+    .wa-float:hover { transform: scale(1.1); }
+
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,0.5); }
+      50%       { box-shadow: 0 4px 40px rgba(37,211,102,0.8); }
+    }
+
+    /* ============================================================
+       ANIMATIONS ON SCROLL
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .sobre-grid,
+      .diferenciais-wrapper,
+      .localizacao-grid { grid-template-columns: 1fr; }
+
+      .hero-card { display: none; }
+
+      .sobre-badge-float {
+        bottom: -1rem;
+        right: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links,
+      .nav-cta .btn { display: none; }
+      .hamburger { display: flex; }
+
+      .rating-big {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--c-border);
+        padding-bottom: 1.2rem;
+      }
+
+      .rating-hero { flex-direction: column; }
+
+      .hero-stats { gap: 1.5rem; }
+
+      .servicos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header id="header">
+  <div class="container">
+    <nav>
+      <a href="#" class="nav-logo">
+        <div class="logo-mark"><i class="fas fa-car-wash"></i></div>
+        <div class="logo-text">
+          <span class="logo-top">EXPRESS-CAR</span>
+          <span class="logo-sub">Lava Jato · Sorocaba</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
+        <li><a href="#localizacao">Localização</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="https://wa.me/5515999999999" target="_blank" class="btn btn-primary" style="padding: 0.65rem 1.3rem;">
+          <i class="fab fa-whatsapp"></i> Agendar
+        </a>
+      </div>
+
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+    <a href="#servicos" onclick="toggleMenu()">Serviços</a>
+    <a href="#avaliacoes" onclick="toggleMenu()">Avaliações</a>
+    <a href="#diferenciais" onclick="toggleMenu()">Diferenciais</a>
+    <a href="#localizacao" onclick="toggleMenu()">Localização</a>
+    <a href="https://wa.me/5515999999999" target="_blank" class="btn btn-whatsapp" style="border-radius:8px;">
+      <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+    </a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-stripe"></div>
+
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        <i class="fas fa-map-marker-alt"></i>
+        Jardim do Sol · Sorocaba, SP
+      </div>
+
+      <h1 class="hero-title">
+        SEU CARRO<br>
+        MERECE O<br>
+        <span class="accent">MELHOR.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Lavagem rápida, resultado impecável e ainda buscamos seu carro onde você estiver.
+        Mais de 160 clientes satisfeitos confirmam: aqui a qualidade fala por si.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://wa.me/5515999999999" target="_blank" class="btn btn-primary">
+          <i class="fab fa-whatsapp"></i> Agendar serviço
+        </a>
+        <a href="#servicos" class="btn btn-outline">
+          <i class="fas fa-list-ul"></i> Ver serviços
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat-item">
+          <strong>4.9</strong>
+          <span>Nota Google</span>
+        </div>
+        <div class="hero-stat-item">
+          <strong>162+</strong>
+          <span>Avaliações</span>
+        </div>
+        <div class="hero-stat-item">
+          <strong>Leva<br>&amp; Traz</strong>
+          <span>Serviço exclusivo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Floating rating card -->
+  <div class="hero-card">
+    <div class="stars">★★★★★</div>
+    <div class="rating-num">4.9</div>
+    <div class="rating-label">162 avaliações no Google</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOBRE
+============================================================ -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+
+      <div class="sobre-img-block reveal">
+        <div class="sobre-img-bg">
+          <div class="car-visual">
+            <i class="fas fa-car"></i>
+          </div>
+        </div>
+        <div class="sobre-badge-float">
+            <img src="imagens/WhatsApp Image 2026-05-04 at 10.25.07.jpeg" alt="carro lavado" style="width:100%; border-radius:8px; border:1px solid var(--c-border);">
+          <strong>+2 anos</strong>
+          <span>de confiança</span>
+        </div>
+      </div>
+
+      <div class="sobre-text reveal reveal-delay-1">
+        <span class="section-label">Quem somos</span>
+        <h2 class="section-title">Cuidado de verdade<br><span>com o seu carro</span></h2>
+
+        <p>
+          O EXPRESS-CAR nasceu da vontade de oferecer mais do que um simples serviço de lavagem —
+          o objetivo é que você sinta a diferença assim que abrir a porta do carro.
+          Nossa equipe é treinada para entregar atenção aos detalhes em cada serviço,
+          do exterior ao interior, sem pressa e sem descuido.
+        </p>
+        <p>
+          Estamos no coração do Jardim do Sol há anos, construindo a confiança de cada cliente
+          um atendimento por vez. Não é por acaso que muitos retornam há mais de dois anos —
+          e ainda nos recomendam para amigos e familiares.
+        </p>
+        <p>
+          Além da qualidade na lavagem, criamos o serviço de <strong style="color:var(--c-blue-light)">leva e traz</strong>:
+          você agenda, nós buscamos seu carro, cuidamos com esmero e devolvemos impecável.
+          Prático, seguro e sem você perder tempo.
+        </p>
+
+        <div class="sobre-chips">
+          <span class="chip"><i class="fas fa-check"></i> Equipe profissional</span>
+          <span class="chip"><i class="fas fa-check"></i> Atendimento atencioso</span>
+          <span class="chip"><i class="fas fa-check"></i> Resultado garantido</span>
+          <span class="chip"><i class="fas fa-check"></i> Preço justo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVIÇOS
+============================================================ -->
+<section id="servicos">
+  <div class="container">
+    <div class="servicos-header reveal">
+      <div>
+        <span class="section-label">O que oferecemos</span>
+        <h2 class="section-title">Serviços que<br><span>fazem a diferença</span></h2>
+      </div>
+      <p style="color:var(--c-muted); max-width:340px; font-size:0.9rem; line-height:1.7">
+        Cada serviço é pensado para atender seu veículo com o cuidado que ele merece.
+      </p>
+    </div>
+
+    <div class="servicos-grid">
+
+      <!-- Lavagem Simples -->
+      <div class="servico-card reveal reveal-delay-1">
+        <div class="servico-icon"><i class="fas fa-tint"></i></div>
+        <h3>Lavagem Simples</h3>
+        <p>Limpeza completa da carroceria com produto de qualidade, enxágue cuidadoso e secagem por pano macio. Ideal para manter o brilho no dia a dia.</p>
+        <div class="servico-items">
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Lavagem externa</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Limpeza de rodas e pneus</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Secagem com pano premium</div>
+        </div>
+      </div>
+
+      <!-- Lavagem Completa -->
+      <div class="servico-card reveal reveal-delay-2">
+        <div class="servico-icon"><i class="fas fa-star"></i></div>
+        <h3>Lavagem Completa</h3>
+        <p>Além de toda a limpeza externa, inclui aspiração interna e limpeza do painel e vidros. Sai com o carro parecendo novo por dentro e por fora.</p>
+        <div class="servico-items">
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Tudo da lavagem simples</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Aspiração do interior</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Limpeza de painel e vidros</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Perfumação do interior</div>
+        </div>
+      </div>
+
+      <!-- Higienização -->
+      <div class="servico-card reveal reveal-delay-3">
+        <div class="servico-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>Higienização</h3>
+        <p>Serviço profundo para bancos, carpetes e teto. Remove ácaros, mofo e odores persistentes. Indicado para quem quer o carro verdadeiramente limpo por dentro.</p>
+        <div class="servico-items">
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Higienização de estofados</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Eliminação de ácaros e odores</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Limpeza de carpetes</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Sanitização completa</div>
+        </div>
+      </div>
+
+      <!-- Leva e Traz — DESTAQUE -->
+      <div class="servico-card featured reveal reveal-delay-1">
+        <div class="servico-icon" style="background:rgba(21,101,255,0.2);border-color:rgba(21,101,255,0.4)">
+          <i class="fas fa-route"></i>
+        </div>
+        <h3>Leva &amp; Traz</h3>
+        <p>Não tem tempo de vir até nós? Sem problema. Buscamos seu carro no endereço que você quiser, realizamos o serviço e devolvemos na hora combinada. Conforto total, sem abrir mão da qualidade.</p>
+        <div class="servico-items">
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Coleta no seu endereço</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Disponível para todos os serviços</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Horário combinado</div>
+          <div class="servico-item"><i class="fas fa-circle-check"></i> Entrega pontual</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AVALIAÇÕES
+============================================================ -->
+<section id="avaliacoes">
+  <div class="container">
+
+    <div class="reveal" style="margin-bottom:2.5rem">
+      <span class="section-label">O que dizem os clientes</span>
+      <h2 class="section-title">162 avaliações.<br><span>Nota 4.9.</span></h2>
+    </div>
+
+    <!-- Rating summary -->
+    <div class="rating-hero reveal">
+      <div class="rating-big">
+        <div class="num">4.9</div>
+        <span class="stars">★★★★★</span>
+        <small>162 avaliações</small>
+      </div>
+      <div class="rating-bars">
+        <div class="bar-row"><span>5 ★</span><div class="bar-track"><div class="bar-fill" style="width:91%"></div></div></div>
+        <div class="bar-row"><span>4 ★</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div></div>
+        <div class="bar-row"><span>3 ★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div></div>
+        <div class="bar-row"><span>2 ★</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div></div>
+        <div class="bar-row"><span>1 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div></div>
+      </div>
+    </div>
+
+    <!-- Review cards -->
+    <div class="reviews-grid">
+
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-header">
+          <div class="avatar" style="background:#1565ff">MA</div>
+          <div class="reviewer-info">
+            <strong>Marcos A.</strong>
+            <div class="review-meta">Cliente há mais de 2 anos · Sorocaba</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>
+          Ótimo lugar para lavar o seu carro e conta com sistema leva e trás. Praticidade que faz toda a diferença no meu dia a dia. Recomendo sem hesitar!
+        </blockquote>
+        <div class="review-source"><i class="fab fa-google"></i> Avaliação no Google Maps</div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-header">
+          <div class="avatar" style="background:#0f4acf">RP</div>
+          <div class="reviewer-info">
+            <strong>Regina P.</strong>
+            <div class="review-meta">Cliente frequente · Jardim do Sol</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>
+          Parabenizo pelo trabalho de excelência da equipe e recomendo a todos. Atendimento atencioso do início ao fim, e o carro ficou impecável. Nota máxima!
+        </blockquote>
+        <div class="review-source"><i class="fab fa-google"></i> Avaliação no Google Maps</div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-3">
+        <div class="review-header">
+          <div class="avatar" style="background:#0842c0">FS</div>
+          <div class="reviewer-info">
+            <strong>Felipe S.</strong>
+            <div class="review-meta">Novo cliente · Sorocaba</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>
+          Serviço rápido, muito top e com preço justo! Fui sem expectativa alta e saí impressionado. Virou meu lava-jato fixo. Já indiquei para todo mundo do trabalho.
+        </blockquote>
+        <div class="review-source"><i class="fab fa-google"></i> Avaliação no Google Maps</div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-1">
+        <div class="review-header">
+          <div class="avatar" style="background:#1153d4">CN</div>
+          <div class="reviewer-info">
+            <strong>Carla N.</strong>
+            <div class="review-meta">Cliente fiel · Sorocaba</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>
+          Uso o serviço de leva e traz toda semana. A equipe é sempre pontual e atenciosa. Dificilmente encontro esse nível de cuidado em outros lugares. Vale muito a pena.
+        </blockquote>
+        <div class="review-source"><i class="fab fa-google"></i> Avaliação no Google Maps</div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-2">
+        <div class="review-header">
+          <div class="avatar" style="background:#1565ff">JM</div>
+          <div class="reviewer-info">
+            <strong>João M.</strong>
+            <div class="review-meta">Cliente · Sorocaba</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>
+          Pessoal muito profissional e preço honesto. Carro ficou perfeito por dentro e por fora. Ambiente organizado e atendimento cordial. Só elogios para o Express-Car!
+        </blockquote>
+        <div class="review-source"><i class="fab fa-google"></i> Avaliação no Google Maps</div>
+      </div>
+
+      <div class="review-card reveal reveal-delay-3">
+        <div class="review-header">
+          <div class="avatar" style="background:#0d3dab">LL</div>
+          <div class="reviewer-info">
+            <strong>Letícia L.</strong>
+            <div class="review-meta">Cliente · Sorocaba</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <blockquote>
+          Higienização dos estofados ficou excelente — meu carro parecia novo novamente. Além disso, a equipe foi super gentil e transparente durante todo o processo. Voltarei com certeza.
+        </blockquote>
+        <div class="review-source"><i class="fab fa-google"></i> Avaliação no Google Maps</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DIFERENCIAIS
+============================================================ -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="diferenciais-wrapper">
+
+      <div class="reveal">
+        <span class="section-label">Por que nos escolher</span>
+        <h2 class="section-title" style="margin-bottom:2rem">O que nos<br><span>destaca</span></h2>
+
+        <div class="diferenciais-list">
+          <div class="diferencial-item">
+            <div class="dif-icon"><i class="fas fa-headset"></i></div>
+            <div class="dif-body">
+              <strong>Atendimento que você lembra</strong>
+              <p>Cada cliente é recebido com atenção de verdade. Nada de pressa ou descaso — nossa equipe está aqui para entender o que seu carro precisa.</p>
+            </div>
+          </div>
+
+          <div class="diferencial-item">
+            <div class="dif-icon"><i class="fas fa-bolt"></i></div>
+            <div class="dif-body">
+              <strong>Rapidez sem abrir mão da qualidade</strong>
+              <p>Serviço ágil e eficiente para quem tem agenda cheia. Você não precisa escolher entre velocidade e resultado — aqui você tem os dois.</p>
+            </div>
+          </div>
+
+          <div class="diferencial-item">
+            <div class="dif-icon"><i class="fas fa-tag"></i></div>
+            <div class="dif-body">
+              <strong>Preço justo, sem surpresas</strong>
+              <p>Transparência total no que você vai pagar. Sem taxas escondidas, sem cobranças inesperadas. Qualidade que cabe no bolso.</p>
+            </div>
+          </div>
+
+          <div class="diferencial-item">
+            <div class="dif-icon"><i class="fas fa-route"></i></div>
+            <div class="dif-body">
+              <strong>Leva e traz: praticidade total</strong>
+              <p>Desenvolvemos esse serviço pensando em você, que não tem tempo a perder. Buscamos, lavamos e devolvemos — tudo sem você sair de onde estiver.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security note -->
+      <div class="reveal reveal-delay-2">
+        <div class="security-note">
+          <div class="sn-icon"><i class="fas fa-shield-check"></i></div>
+          <h4>Tranquilidade durante todo o serviço</h4>
+          <p>
+            Recomendamos que você retire objetos pessoais, documentos e itens de valor do veículo
+            antes de qualquer serviço — não só aqui, mas em qualquer estabelecimento que você frequente.
+            Essa é uma prática que adotamos abertamente, pois valorizamos a sua segurança e a confiança
+            que você deposita em nós.
+          </p>
+          <p style="margin-top:0.8rem">
+            Nossa equipe é profissional e comprometida, e trabalhamos para que cada visita seja uma
+            experiência tranquila e positiva do início ao fim.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LOCALIZAÇÃO
+============================================================ -->
+<section id="localizacao">
+  <div class="container">
+
+    <div class="reveal" style="margin-bottom:2.5rem">
+      <span class="section-label">Onde estamos</span>
+      <h2 class="section-title">Fácil de<br><span>encontrar</span></h2>
+    </div>
+
+    <div class="localizacao-grid">
+
+      <div class="info-blocks reveal">
+        <div class="info-block">
+          <div class="ib-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="ib-text">
+            <strong>Endereço</strong>
+            <span>R. José de Oliveira, 248<br>Jardim do Sol · Sorocaba, SP<br>CEP 18017-029</span>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="ib-icon"><i class="fas fa-clock"></i></div>
+          <div class="ib-text">
+            <strong>Horário de funcionamento</strong>
+            <span>Aberto até as 17h <span class="open-badge">Aberto</span></span>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="ib-icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="ib-text">
+            <strong>WhatsApp</strong>
+            <span>(15) 99999-9999</span>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="ib-icon"><i class="fas fa-star"></i></div>
+          <div class="ib-text">
+            <strong>Avaliação no Google</strong>
+            <span style="color:#f5b731">★★★★★</span> 4.9 · 162 avaliações
+          </div>
+        </div>
+
+        <a href="https://wa.me/5515999999999" target="_blank" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:0.5rem">
+          <i class="fab fa-whatsapp"></i> Agendar via WhatsApp
+        </a>
+      </div>
+
+      <!-- Google Maps embed -->
+      <div class="map-frame reveal reveal-delay-2">
+        <iframe
+            src="https://www.google.com/maps?q=R.+José+de+Oliveira,+248,+Jardim+do+Sol,+Sorocaba,+SP,+18017-029&output=embed"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização EXPRESS-CAR Lava Jato"
+        ></iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTATO / CTA
+============================================================ -->
+<section id="contato">
+  <div class="container">
+    <div class="cta-box reveal">
+      <span class="section-label" style="justify-content:center">Vamos começar?</span>
+      <h2>Agende agora<br>e seu carro agradece</h2>
+      <p>
+        Sem espera, sem complicação. Entre em contato pelo WhatsApp e garanta
+        sua lavagem — ou ative o leva e traz para mais comodidade ainda.
+      </p>
+      <div class="cta-actions">
+        <a href="https://wa.me/5515999999999" target="_blank" class="btn btn-whatsapp">
+          <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+        </a>
+        <a href="tel:+5515999999999" class="btn btn-outline">
+          <i class="fas fa-phone"></i> Ligar agora
+        </a>
+      </div>
+      <div class="cta-guarantee">
+        <i class="fas fa-shield-check"></i>
+        Serviço de qualidade garantida · Sorocaba, SP
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <p class="footer-copy">
+        © 2024 EXPRESS-CAR Lava Jato · Sorocaba, SP · Todos os direitos reservados
+      </p>
+      <div class="footer-links">
+        <a href="#hero">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#localizacao">Localização</a>
+        <a href="https://wa.me/5515999999999" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp floating button -->
+<a href="https://wa.me/5515999999999" target="_blank" class="wa-float" title="Fale conosco no WhatsApp" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  /* ——— Header scroll state ——— */
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  /* ——— Mobile menu toggle ——— */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  /* ——— Smooth scroll for anchor links ——— */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ——— Reveal on scroll ——— */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
